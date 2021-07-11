@@ -19,7 +19,7 @@ public class FormSubmissionService {
 
     public void submitForm(FormDetails formDetails) {
         LocationDetails locationDetails = new LocationDetails();
-        if(formDetails.getLocId() == null && formDetails.getOtherLocationName() !=null) {
+        if(formDetails.getLocId() == 3 && formDetails.getOtherLocationName() !=null) {
             locationDetails.setName(formDetails.getOtherLocationName());
             locationDetails.setAddress(formDetails.getOtherLocationAddress());
             locationDetails.setPinCode(formDetails.getOtherLocationPinCode());
