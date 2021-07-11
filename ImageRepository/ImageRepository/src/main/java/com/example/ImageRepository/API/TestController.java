@@ -53,7 +53,7 @@ public class TestController {
     }
 
     @PutMapping("/uploadFormData")
-    public void uploadFormData(FormDetails formDetails) {
+    public void uploadFormData(@RequestBody FormDetails formDetails) {
         formSubmissionService.submitForm(formDetails);
     }
 

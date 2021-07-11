@@ -3,10 +3,7 @@ package com.example.ImageRepository.models;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -15,22 +12,23 @@ import javax.persistence.Table;
 public class FormDetails {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private Integer id;
 
     @Column(name = "loc_id")
-    private Integer loc_id;
+    private Integer locId;
 
-    @Column(name = "other_loc_name")
+    @Transient
     private String otherLocationName;
 
-    @Column(name = "other_loc_state")
+    @Transient
     private String otherLocationState;
 
-    @Column(name = "other_loc_address")
+    @Transient
     private String otherLocationAddress;
 
-    @Column(name = "other_loc_pincode")
+    @Transient
     private String otherLocationPinCode;
 
     @Column(name = "I_USER_ID")

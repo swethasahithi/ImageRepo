@@ -1,8 +1,10 @@
 package com.example.ImageRepository.services;
 
 import com.example.ImageRepository.models.FormDetails;
+import com.example.ImageRepository.models.LocationDetails;
 import com.example.ImageRepository.models.TopContributions;
 import com.example.ImageRepository.repository.FormDetailsRepository;
+import com.example.ImageRepository.repository.LocationDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +14,20 @@ public class FormSubmissionService {
     @Autowired
     FormDetailsRepository formDetailsRepository;
 
+    @Autowired
+    LocationDetailsRepository locationDetailsRepository;
+
     public void submitForm(FormDetails formDetails) {
-        formDetailsRepository.save(formDetails);
+        LocationDetails locationDetails = new LocationDetails();
+        if(formDetails.getLocId() == null && formDetails.getOtherLocationName() !=null) {
+            locationDetails.setName(formDetails.getOtherLocationName());
+            locationDetails.setAddress(formDetails.getOtherLocationAddress());
+            locationDetails.setPinCode(formDetails.getOtherLocationPinCode());
+            locationDetails.setState(formDetails.getOtherLocationPinCode());
+            LocationDetails locationDetailsAfterSave = locationDetailsRepository.saveAndFlush(locationDetails);
+            formDetails.setLocId(locationDetailsAfterSave.getId());
+        }
+        formDetailsRepository.saveAndFlush(formDetails);
     }
 
     public TopContributions getCounts() {
